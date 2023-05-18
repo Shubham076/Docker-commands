@@ -1,0 +1,61 @@
+Docker Compose is a tool for defining and running multi-container Docker applications. It uses a YAML file (docker-compose.yml) to configure the application's services. Here are some common Docker Compose commands:
+
+docker-compose up - Starts and runs the entire app.
+
+-d or --detach flag is used to start the services in the background.
+--build flag is used to build images before starting containers.
+docker-compose down - Stops and removes containers, networks, volumes, and images created by up.
+
+--rmi all or --rmi local removes images. 'all' removes all images, 'local' removes only images that don't have a custom tag.
+-v removes volumes declared in the volumes section of the Compose file and anonymous volumes attached to containers.
+docker-compose ps - Lists all running services.
+
+docker-compose build - Builds all services.
+
+docker-compose pull - Pulls an image associated with a service defined in a docker-compose.yml but does not start a container.
+
+docker-compose start - Starts existing containers for a service.
+
+docker-compose stop - Stops running containers without removing them. They can be started again with docker-compose start.
+
+docker-compose restart - Restarts all the services.
+
+docker-compose logs - Displays log output from services.
+
+--tail flag is used to limit the number of shown log lines.
+-f or --follow flag is used to follow log output.
+docker-compose exec - Executes a command in a running container.
+
+E.g. docker-compose exec web bash would start a bash shell in a running 'web' service.
+docker-compose rm - Removes stopped service containers.
+
+docker-compose run - Runs a one-time command against a service.
+
+E.g. docker-compose run web bash would start a bash shell in a new 'web' service.
+
+
+docker-compose.yaml
+version: "3.9"
+services:
+  web:
+    build: ./web
+  db:
+    image: postgres
+
+Here we have two services, web and db. web service is defined with a build directive and db service is defined with an image directive.
+
+When you run docker-compose build, Docker Compose will build the web service by looking in the ./web directory for a Dockerfile and building an image according to that Dockerfile's instructions. However, it will not build the db service as it's using a pre-built image, in this case postgres.
+
+If an image is not found locally, Docker will attempt to pull it from a Docker registry when you use docker-compose up.
+
+Also, docker-compose build does not create containers. It only builds images. The containers are created when you use docker-compose up.
+
+Docker-compose up is essentially a combination of a few commands:
+
+docker-compose pull: It will pull any images from a Docker registry that are not available locally. If there's a newer version of the image in the registry, it will pull that as well, depending on your image tag.
+
+docker-compose build: If your service is set up to build an image (using a build context in your Docker Compose file), docker-compose up will build the image as per the Dockerfile instructions.
+
+docker-compose create: After building or pulling the necessary images, docker-compose up will create the necessary containers from those images.
+
+docker-compose start: Finally, it starts the created containers, and your services are now running.

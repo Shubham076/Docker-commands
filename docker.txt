@@ -1,0 +1,47 @@
+docker run - Used to start a new container from an image.
+
+-d or --detach: run the container in the background.
+-p or --publish: publish a container's port to the host.
+--name: assign a name to the container.
+-v or --volume: bind mount a volume.
+docker ps - List running containers.
+
+-a or --all: show all containers (default shows just running).
+docker stop [CONTAINER_ID or CONTAINER_NAME] - Stop a running container.
+
+docker rm [CONTAINER_ID or CONTAINER_NAME] - Remove a stopped container.
+
+docker pull [IMAGE_NAME:TAG] - Pull an image or a repository from a registry.
+
+docker rmi [IMAGE_ID] - Remove an image from local storage.
+
+docker images - List images.
+
+docker build - Build an image from a Dockerfile.
+
+-t or --tag: Name and optionally a tag in the 'name:tag' format.
+docker exec - Run a command in a running container.
+
+-it: start an interactive bash shell on the container.
+docker logs [CONTAINER_ID or CONTAINER_NAME] - Fetch the logs of a container.
+
+docker inspect [CONTAINER_ID or CONTAINER_NAME or IMAGE_ID or IMAGE_NAME] - Return low-level information on Docker objects.
+
+docker volume create [VOLUME_NAME] - Create a volume.
+
+docker volume ls - List volumes.
+
+docker volume rm [VOLUME_NAME] - Remove a volume.
+
+docker network create [NETWORK_NAME] - Create a network.
+
+docker network ls - List networks.
+
+docker network rm [NETWORK_NAME] - Remove a network.
+
+docker login - Log in to a Docker registry.
+
+docker push [IMAGE_NAME] - Push an image or a repository to a registry.
+
+docker tag [SOURCE_IMAGE:TAG] [TARGET_IMAGE:TAG] - Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE.
+
