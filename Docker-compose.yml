@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7.2.1
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/data
+    container_name: redis
+
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      # Using this only for development purpose. In production, you should handle it securely.
+      MYSQL_DATABASE: "mydb" # Optional: Define this if you need a database to be created
+      MYSQL_USER: "user" # Optional: Define this to create a user other than root
+      MYSQL_PASSWORD: "password" # Optional: Define the user's password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql:/var/lib/mysql
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    # It is not advisable to use the root password in your docker-compose file for production environments
+
+  rabbitmq:
+    image: rabbitmq:3.12.6-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq/mnesia/
+    container_name: rabbitmq
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "root"
+      MONGO_INITDB_ROOT_PASSWORD: "root"
+    volumes:
+      - mongodb:/data/db
+    container_name: mongodb
+
+volumes:
+  redis:
+  mysql:
+  rabbitmq:
+  mongodb:
