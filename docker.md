@@ -55,6 +55,10 @@ This guide provides a quick reference to commonly used Docker commands and their
 docker exec -it [container_id_or_name] /bin/bash
 
 ```
+- Running inside cli application
+```
+  docker run -it --name cli --entrypoint /bin/bash cli:latest
+```
 
 ## Logs and Inspection
 
